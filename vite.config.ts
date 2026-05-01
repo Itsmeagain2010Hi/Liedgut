@@ -6,9 +6,8 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    // WICHTIG: Setze dies auf deinen exakten GitHub Repository-Namen (z.B. '/mein-repo/').
-    // Wenn dein Repository link 'https://github.com/nutzer/liedgut-app' ist, dann muss hier '/liedgut-app/' stehen.
-    base: mode === 'production' ? '/liedgut/' : '/',
+    // Wir nutzen einen relativen Pfad, damit die App sowohl lokal als auch auf GitHub Pages (unabhängig vom Repo-Namen) funktioniert.
+    base: './',
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),

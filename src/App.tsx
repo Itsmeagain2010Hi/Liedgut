@@ -241,9 +241,9 @@ const PrivacyPolicy = () => {
               <h3 className="text-xl font-bold text-slate-900">1. Einleitung und Verantwortlicher</h3>
               <p>Diese Datenschutzerklärung informiert Sie darüber, wie diese App (nachfolgend „App“) mit personenbezogenen Daten umgeht. Verantwortlicher für diese App ist:</p>
               <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 font-mono text-sm leading-loose">
-                <strong>Christian K.</strong><br />
-                [Deine Straße und Hausnummer]<br />
-                [Deine PLZ und Wohnort]<br />
+                [Dein Vor- und Nachname]<br />
+                [Optional: Deine Straße und Hausnummer]<br />
+                [Optional: Deine PLZ und Wohnort]<br />
                 E-Mail: liedgut@outlook.de
               </div>
             </div>
