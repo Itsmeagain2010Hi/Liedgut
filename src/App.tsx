@@ -205,11 +205,11 @@ const Showcase = () => {
           viewport={{ once: true }}
           className="relative"
         >
-          <div className="relative z-10 p-2 sm:p-4 bg-slate-800 rounded-[2rem] sm:rounded-[2.5rem] border-[4px] sm:border-[8px] border-slate-700 shadow-2xl xl:-mr-20">
+            <div className="relative z-10 p-2 sm:p-4 bg-slate-800 rounded-[2rem] sm:rounded-[2.5rem] border-[4px] sm:border-[8px] border-slate-700 shadow-2xl xl:-mr-20">
             <img 
               src={`${import.meta.env.BASE_URL}Screenshot_20260501_105708_Songbook Pro.jpg`} 
               alt="Liedgut App Tablet Interface"
-              className="w-full h-auto rounded-xl sm:rounded-2xl shadow-inner bg-slate-800 object-contain [image-rendering:-webkit-optimize-contrast] transform-gpu contrast-[1.02]"
+              className="w-full h-auto rounded-xl sm:rounded-2xl shadow-inner bg-slate-800 object-contain transform-gpu"
               loading="eager"
               referrerPolicy="no-referrer"
             />
@@ -241,9 +241,9 @@ const PrivacyPolicy = () => {
               <h3 className="text-xl font-bold text-slate-900">1. Einleitung und Verantwortlicher</h3>
               <p>Diese Datenschutzerklärung informiert Sie darüber, wie diese App (nachfolgend „App“) mit personenbezogenen Daten umgeht. Verantwortlicher für diese App ist:</p>
               <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 font-mono text-sm leading-loose">
-                [Dein Vor- und Nachname]<br />
-                [Optional: Deine Straße und Hausnummer]<br />
-                [Optional: Deine PLZ und Wohnort]<br />
+                <strong>Christian K.</strong><br />
+                [Deine Straße und Hausnummer]<br />
+                [Deine PLZ und Wohnort]<br />
                 E-Mail: liedgut@outlook.de
               </div>
             </div>

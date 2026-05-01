@@ -6,8 +6,8 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    // ACHTUNG: Der 'base' Wert muss GENAU deinem Repository-Namen auf GitHub entsprechen.
-    // Wenn dein Repository link 'https://github.com/username/meine-app' ist, dann muss hier '/meine-app/' stehen.
+    // WICHTIG: Setze dies auf deinen exakten GitHub Repository-Namen (z.B. '/mein-repo/').
+    // Wenn dein Repository link 'https://github.com/nutzer/liedgut-app' ist, dann muss hier '/liedgut-app/' stehen.
     base: mode === 'production' ? '/liedgut/' : '/',
     plugins: [react(), tailwindcss()],
     define: {
