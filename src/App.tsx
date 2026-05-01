@@ -230,38 +230,77 @@ const PrivacyPolicy = () => {
   return (
     <section id="privacy" className="py-24 bg-slate-50 border-t border-slate-200">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="flex items-center gap-3 mb-8">
-          <Shield className="text-blue-600" size={32} />
-          <h2 className="text-3xl font-sans font-extrabold text-slate-900 tracking-tight">Datenschutz & Richtlinien</h2>
-        </div>
-        <div className="prose prose-slate max-w-none text-slate-600 space-y-6">
-          <p className="text-lg">
-            Der Schutz Ihrer persönlichen Daten ist uns ein besonderes Anliegen. Wir verarbeiten Ihre Daten ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO).
-          </p>
-          
-          <div className="grid gap-8 mt-12 sm:grid-cols-2">
-            <div className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Datenspeicherung</h3>
-              <p className="text-sm leading-relaxed">
-                Die App "Liedgut" speichert Songdaten (Noten, Texte, .mxl Dateien) lokal auf Ihrem Gerät. Es werden keine Daten an externe Cloud-Server übertragen, sofern Sie dies nicht explizit durch manuelle Exporte veranlassen.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Berechtigungen</h3>
-              <p className="text-sm leading-relaxed">
-                Die App benötigt Zugriff auf das Dateisystem, um Song-Dateien importieren zu können.
-              </p>
-            </div>
+        <div className="bg-white p-8 sm:p-12 rounded-[2.5rem] border border-slate-200 shadow-sm">
+          <div className="flex items-center gap-3 mb-10">
+            <Shield className="text-blue-600" size={32} />
+            <h2 className="text-3xl font-sans font-extrabold text-slate-900 tracking-tight">Datenschutzerklärung</h2>
           </div>
+          
+          <div className="prose prose-slate max-w-none space-y-10 text-slate-600 leading-relaxed">
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-slate-900">1. Einleitung und Verantwortlicher</h3>
+              <p>Diese Datenschutzerklärung informiert Sie darüber, wie diese App (nachfolgend „App“) mit personenbezogenen Daten umgeht. Verantwortlicher für diese App ist:</p>
+              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 font-mono text-sm leading-loose">
+                [Dein Vor- und Nachname]<br />
+                [Optional: Deine Straße und Hausnummer]<br />
+                [Optional: Deine PLZ und Wohnort]<br />
+                E-Mail: liedgut@outlook.de
+              </div>
+            </div>
 
-          <div id="impressum" className="pt-12 border-t border-slate-200 mt-12">
-            <h3 className="text-xl font-extrabold text-slate-900 mb-6">Impressum</h3>
-            <div className="bg-blue-600 text-white p-8 rounded-3xl shadow-xl shadow-blue-100">
-              <p className="text-sm leading-loose">
-                <span className="font-bold opacity-70 uppercase tracking-widest text-[10px] block mb-2 mt-4">Kontakt</span>
-                E-Mail: liedgut@outlook.de<br />
-              </p>
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-slate-900">2. Grundprinzip der lokalen Datenverarbeitung</h3>
+              <p>Der Schutz Ihrer Privatsphäre ist uns ein zentrales Anliegen. Diese App wurde nach dem Prinzip „Privacy by Design“ entwickelt:</p>
+              <ul className="space-y-3">
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                  <span><strong>Keine Cloud-Anbindung:</strong> Die App verfügt über keine Funktionen zur Übertragung von Daten an Server.</span>
+                </li>
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                  <span><strong>Keine Analyse-Tools:</strong> Es werden keine Tracking-Dienste, Werbe-IDs oder Analyse-Tools (wie Google Analytics) verwendet.</span>
+                </li>
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                  <span><strong>Keine Registrierung:</strong> Zur Nutzung der App ist kein Benutzerkonto und keine Eingabe von persönlichen Daten erforderlich.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-slate-900">3. Zugriff auf .mxl-Dateien</h3>
+              <p>Damit die App ihren Zweck erfüllen kann, Musiknoten im MusicXML-Format (.mxl) anzuzeigen, benötigt sie Zugriff auf den Speicher Ihres Endgeräts.</p>
+              <ul className="space-y-3">
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                  <span><strong>Zweck:</strong> Der Zugriff erfolgt ausschließlich, um die von Ihnen ausgewählten .mxl-Dateien einzulesen und grafisch auf dem Display darzustellen.</span>
+                </li>
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                  <span><strong>Umfang der Verarbeitung:</strong> Die App verarbeitet die Inhalte der Dateien ausschließlich lokal im Arbeitsspeicher Ihres Geräts. Es werden keine Kopien der Notendateien erstellt oder an Dritte weitergegeben.</span>
+                </li>
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                  <span><strong>Berechtigungen:</strong> Die App fordert den Zugriff auf den Speicher (Media/Files) nur an, um die Anzeige der Dateien technisch zu ermöglichen. Sie können diese Berechtigung jederzeit in den Systemeinstellungen Ihres Geräts widerrufen.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-slate-900">4. Erhebung von technischen Daten</h3>
+              <p>Wir als Entwickler erheben keine Daten. Beim Herunterladen und Nutzen der App über den Google Play Store werden jedoch automatisch Informationen durch den Store-Betreiber (Google) erfasst (z. B. Gerätemodell, Betriebssystemversion).</p>
+              <p>Sofern Sie der Übermittlung von Nutzungs- und Diagnosedaten an Google in Ihren Geräteeinstellungen zugestimmt haben, erhalten wir ggf. anonymisierte Absturzberichte, um die App zu verbessern. Diese enthalten keine Informationen, mit denen wir Sie persönlich identifizieren könnten.</p>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-slate-900">5. Rechte der Nutzer</h3>
+              <p>Da die App keine personenbezogenen Daten auf externen Servern speichert, bestehen in der Regel keine Datenbestände, über die wir Auskunft erteilen oder die wir löschen könnten. Alle Daten verbleiben unter Ihrer vollen Kontrolle auf Ihrem Gerät. Bei Fragen können Sie sich jedoch jederzeit an die oben genannte E-Mail-Adresse wenden.</p>
+            </div>
+
+            <div className="space-y-4 pt-6 border-t border-slate-100">
+              <h3 className="text-xl font-bold text-slate-900">6. Änderungen</h3>
+              <p>Diese Datenschutzerklärung kann gelegentlich aktualisiert werden, um sie an neue Funktionen der App oder rechtliche Anforderungen anzupassen.</p>
+              <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-8">Stand: Mai 2026</p>
             </div>
           </div>
         </div>
