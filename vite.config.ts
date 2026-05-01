@@ -6,6 +6,8 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
+    // Wenn du eine eigene Domain nutzt (z.B. www.deine-seite.de), setze base auf '/'
+    // Für GitHub Pages (z.B. username.github.io/liedgut/) muss es der Repo-Name sein
     base: mode === 'production' ? '/liedgut/' : '/',
     plugins: [react(), tailwindcss()],
     define: {
