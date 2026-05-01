@@ -6,7 +6,7 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    // Wir nutzen einen relativen Pfad, damit die App sowohl lokal als auch auf GitHub Pages (unabhängig vom Repo-Namen) funktioniert.
+    // Wir nutzen eine relative Basis, damit die App überall funktioniert (GitHub Pages Unterordner oder Haupt-Domain).
     base: './',
     plugins: [react(), tailwindcss()],
     define: {

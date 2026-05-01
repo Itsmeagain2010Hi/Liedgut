@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Music, Layout, Settings, Share2, Shield, Mail, Globe, Play, Tablet, Layers, Download, Search } from 'lucide-react';
 
 // Components
-const Navigation = () => {
+const Navigation = ({ onOpenPrivacy }: { onOpenPrivacy: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -24,13 +24,13 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center overflow-hidden shadow-sm border border-slate-100">
-            <img src="./songbook_logo.jpg" alt="Logo" className="w-full h-full object-cover" />
+            <img src={`${import.meta.env.BASE_URL}songbook_logo.jpg`} alt="Logo" className="w-full h-full object-cover" />
           </div>
           <span className="font-sans font-bold text-xl tracking-tight text-slate-900">Liedgut</span>
         </div>
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
           <a href="#features" className="hover:text-blue-600 transition-colors">Features</a>
-          <a href="#privacy" className="hover:text-blue-600 transition-colors">Impressum & Datenschutz</a>
+          <button onClick={onOpenPrivacy} className="hover:text-blue-600 transition-colors">Impressum & Datenschutz</button>
           <a href="#support" className="hover:text-blue-600 transition-colors">Support</a>
           <button className="bg-slate-900 text-white px-5 py-2.5 rounded-full text-xs font-semibold hover:bg-slate-800 transition-all shadow-md shadow-slate-200 flex items-center gap-2">
             <Download size={16} />
@@ -81,7 +81,7 @@ const Hero = () => {
           {/* Library View Card */}
           <div className="w-[180px] h-[360px] sm:w-[280px] sm:h-[560px] bg-slate-900 rounded-[1.2rem] sm:rounded-[2rem] p-1.5 sm:p-2 shadow-2xl border-4 border-slate-800 relative z-10 overflow-hidden shrink-0">
             <div className="w-full h-full rounded-[0.8rem] sm:rounded-[1.4rem] overflow-hidden relative">
-              <img src="./screenshot_library.jpg" alt="Liedgut Library View" className="w-full h-full object-cover" />
+              <img src={`${import.meta.env.BASE_URL}screenshot_library.jpg`} alt="Liedgut Library View" className="w-full h-full object-cover" />
             </div>
           </div>
           
@@ -92,7 +92,7 @@ const Hero = () => {
             className="absolute -bottom-8 -right-4 lg:-right-4 z-30 bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3 max-w-[160px] sm:max-w-[200px]"
           >
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center overflow-hidden border border-slate-50">
-              <img src="./songbook_logo.jpg" alt="Logo" className="w-full h-full object-cover" />
+              <img src={`${import.meta.env.BASE_URL}songbook_logo.jpg`} alt="Logo" className="w-full h-full object-cover" />
             </div>
             <div>
               <div className="text-[10px] sm:text-xs font-bold text-slate-900 leading-none">Format engine</div>
@@ -207,7 +207,7 @@ const Showcase = () => {
         >
             <div className="relative z-10 p-2 sm:p-4 bg-slate-800 rounded-[2rem] sm:rounded-[2.5rem] border-[4px] sm:border-[8px] border-slate-700 shadow-2xl xl:-mr-20">
             <img 
-              src="./Screenshot_20260501_105708_Songbook Pro.jpg" 
+              src={`${import.meta.env.BASE_URL}Screenshot_20260501_105708_Songbook Pro.jpg`} 
               alt="Liedgut App Tablet Interface"
               className="w-full h-auto rounded-xl sm:rounded-2xl shadow-inner bg-slate-800 object-contain transform-gpu"
               loading="eager"
@@ -226,86 +226,111 @@ const Showcase = () => {
   );
 };
 
-const PrivacyPolicy = () => {
+const PrivacyPolicy = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   return (
-    <section id="privacy" className="py-24 bg-slate-50 border-t border-slate-200">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="bg-white p-8 sm:p-12 rounded-[2.5rem] border border-slate-200 shadow-sm">
-          <div className="flex items-center gap-3 mb-10">
-            <Shield className="text-blue-600" size={32} />
-            <h2 className="text-3xl font-sans font-extrabold text-slate-900 tracking-tight">Datenschutzerklärung</h2>
-          </div>
-          
-          <div className="prose prose-slate max-w-none space-y-10 text-slate-600 leading-relaxed">
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-slate-900">1. Einleitung und Verantwortlicher</h3>
-              <p>Diese Datenschutzerklärung informiert Sie darüber, wie diese App (nachfolgend „App“) mit personenbezogenen Daten umgeht. Verantwortlicher für diese App ist:</p>
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 font-mono text-sm leading-loose">
-                Christian K.<br />
-                [Deine Straße und Hausnummer]<br />
-                [Deine PLZ und Wohnort]<br />
-                E-Mail: liedgut@outlook.de
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col"
+          >
+            <div className="p-6 sm:p-8 border-b border-slate-100 flex justify-between items-center bg-white sticky top-0 z-10">
+              <div className="flex items-center gap-3">
+                <Shield className="text-blue-600" size={28} />
+                <h2 className="text-2xl font-sans font-extrabold text-slate-900 tracking-tight">Datenschutz & Impressum</h2>
+              </div>
+              <button 
+                onClick={onClose}
+                className="w-10 h-10 rounded-full bg-slate-50 hover:bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-600 transition-colors"
+                aria-label="Schließen"
+              >
+                <Share2 className="rotate-45" size={20} />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto p-8 sm:p-12">
+              <div className="prose prose-slate max-w-none space-y-10 text-slate-600 leading-relaxed">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-slate-900">1. Einleitung und Verantwortlicher</h3>
+                  <p>Diese Datenschutzerklärung informiert Sie darüber, wie diese App (nachfolgend „App“) mit personenbezogenen Daten umgeht. Verantwortlicher für diese App ist:</p>
+                  <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 font-mono text-sm leading-loose">
+                    Clemens K.<br />
+                    Ostring 13<br />
+                    63110 Rodgau<br />
+                    E-Mail: liedgut@outlook.de
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-slate-900">2. Grundprinzip der lokalen Datenverarbeitung</h3>
+                  <p>Der Schutz Ihrer Privatsphäre ist uns ein zentrales Anliegen. Diese App wurde nach dem Prinzip „Privacy by Design“ entwickelt:</p>
+                  <ul className="space-y-3">
+                    <li className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                      <span><strong>Keine Cloud-Anbindung:</strong> Die App verfügt über keine Funktionen zur Übertragung von Daten an Server.</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                      <span><strong>Keine Analyse-Tools:</strong> Es werden keine Tracking-Dienste, Werbe-IDs oder Analyse-Tools (wie Google Analytics) verwendet.</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                      <span><strong>Keine Registrierung:</strong> Zur Nutzung der App ist kein Benutzerkonto und keine Eingabe von persönlichen Daten erforderlich.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-slate-900">3. Zugriff auf .mxl-Dateien</h3>
+                  <p>Damit die App ihren Zweck erfüllen kann, Musiknoten im MusicXML-Format (.mxl) anzuzeigen, benötigt sie Zugriff auf den Speicher Ihres Endgeräts.</p>
+                  <ul className="space-y-3">
+                    <li className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                      <span><strong>Zweck:</strong> Der Zugriff erfolgt ausschließlich, um die von Ihnen ausgewählten .mxl-Dateien einzulesen und grafisch auf dem Display darzustellen.</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                      <span><strong>Umfang der Verarbeitung:</strong> Die App verarbeitet die Inhalte der Dateien ausschließlich lokal im Arbeitsspeicher Ihres Geräts. Es werden keine Kopien der Notendateien erstellt oder an Dritte weitergegeben.</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
+                      <span><strong>Berechtigungen:</strong> Die App fordert den Zugriff auf den Speicher (Media/Files) nur an, um die Anzeige der Dateien technisch zu ermöglichen. Sie können diese Berechtigung jederzeit in den Systemeinstellungen Ihres Geräts widerrufen.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-slate-900">4. Erhebung von technischen Daten</h3>
+                  <p>Wir als Entwickler erheben keine Daten. Beim Herunterladen und Nutzen der App über den Google Play Store werden jedoch automatisch Informationen durch den Store-Betreiber (Google) erfasst (z. B. Gerätemodell, Betriebssystemversion).</p>
+                  <p>Sofern Sie der Übermittlung von Nutzungs- und Diagnosedaten an Google in Ihren Geräteeinstellungen zugestimmt haben, erhalten wir ggf. anonymisierte Absturzberichte, um die App zu verbessern. Diese enthalten keine Informationen, mit denen wir Sie persönlich identifizieren könnten.</p>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-slate-900">5. Rechte der Nutzer</h3>
+                  <p>Da die App keine personenbezogenen Daten auf externen Servern speichert, bestehen in der Regel keine Datenbestände, über die wir Auskunft erteilen oder die wir löschen könnten. Alle Daten verbleiben unter Ihrer vollen Kontrolle auf Ihrem Gerät. Bei Fragen können Sie sich jedoch jederzeit an die oben genannte E-Mail-Adresse wenden.</p>
+                </div>
+
+                <div className="space-y-4 pt-6 border-t border-slate-100">
+                  <h3 className="text-xl font-bold text-slate-900">6. Änderungen</h3>
+                  <p>Diese Datenschutzerklärung kann gelegentlich aktualisiert werden, um sie an neue Funktionen der App oder rechtliche Anforderungen anzupassen.</p>
+                  <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-8">Stand: Mai 2026</p>
+                </div>
               </div>
             </div>
-
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-slate-900">2. Grundprinzip der lokalen Datenverarbeitung</h3>
-              <p>Der Schutz Ihrer Privatsphäre ist uns ein zentrales Anliegen. Diese App wurde nach dem Prinzip „Privacy by Design“ entwickelt:</p>
-              <ul className="space-y-3">
-                <li className="flex gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
-                  <span><strong>Keine Cloud-Anbindung:</strong> Die App verfügt über keine Funktionen zur Übertragung von Daten an Server.</span>
-                </li>
-                <li className="flex gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
-                  <span><strong>Keine Analyse-Tools:</strong> Es werden keine Tracking-Dienste, Werbe-IDs oder Analyse-Tools (wie Google Analytics) verwendet.</span>
-                </li>
-                <li className="flex gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
-                  <span><strong>Keine Registrierung:</strong> Zur Nutzung der App ist kein Benutzerkonto und keine Eingabe von persönlichen Daten erforderlich.</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-slate-900">3. Zugriff auf .mxl-Dateien</h3>
-              <p>Damit die App ihren Zweck erfüllen kann, Musiknoten im MusicXML-Format (.mxl) anzuzeigen, benötigt sie Zugriff auf den Speicher Ihres Endgeräts.</p>
-              <ul className="space-y-3">
-                <li className="flex gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
-                  <span><strong>Zweck:</strong> Der Zugriff erfolgt ausschließlich, um die von Ihnen ausgewählten .mxl-Dateien einzulesen und grafisch auf dem Display darzustellen.</span>
-                </li>
-                <li className="flex gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
-                  <span><strong>Umfang der Verarbeitung:</strong> Die App verarbeitet die Inhalte der Dateien ausschließlich lokal im Arbeitsspeicher Ihres Geräts. Es werden keine Kopien der Notendateien erstellt oder an Dritte weitergegeben.</span>
-                </li>
-                <li className="flex gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-2" />
-                  <span><strong>Berechtigungen:</strong> Die App fordert den Zugriff auf den Speicher (Media/Files) nur an, um die Anzeige der Dateien technisch zu ermöglichen. Sie können diese Berechtigung jederzeit in den Systemeinstellungen Ihres Geräts widerrufen.</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-slate-900">4. Erhebung von technischen Daten</h3>
-              <p>Wir als Entwickler erheben keine Daten. Beim Herunterladen und Nutzen der App über den Google Play Store werden jedoch automatisch Informationen durch den Store-Betreiber (Google) erfasst (z. B. Gerätemodell, Betriebssystemversion).</p>
-              <p>Sofern Sie der Übermittlung von Nutzungs- und Diagnosedaten an Google in Ihren Geräteeinstellungen zugestimmt haben, erhalten wir ggf. anonymisierte Absturzberichte, um die App zu verbessern. Diese enthalten keine Informationen, mit denen wir Sie persönlich identifizieren könnten.</p>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-slate-900">5. Rechte der Nutzer</h3>
-              <p>Da die App keine personenbezogenen Daten auf externen Servern speichert, bestehen in der Regel keine Datenbestände, über die wir Auskunft erteilen oder die wir löschen könnten. Alle Daten verbleiben unter Ihrer vollen Kontrolle auf Ihrem Gerät. Bei Fragen können Sie sich jedoch jederzeit an die oben genannte E-Mail-Adresse wenden.</p>
-            </div>
-
-            <div className="space-y-4 pt-6 border-t border-slate-100">
-              <h3 className="text-xl font-bold text-slate-900">6. Änderungen</h3>
-              <p>Diese Datenschutzerklärung kann gelegentlich aktualisiert werden, um sie an neue Funktionen der App oder rechtliche Anforderungen anzupassen.</p>
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-8">Stand: Mai 2026</p>
-            </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
-    </section>
+      )}
+    </AnimatePresence>
   );
 };
 
@@ -339,7 +364,7 @@ const Contact = () => {
   );
 };
 
-const Footer = () => {
+const Footer = ({ onOpenPrivacy }: { onOpenPrivacy: () => void }) => {
   return (
     <footer className="bg-white border-t border-slate-200 py-16">
       <div className="max-w-7xl mx-auto px-6">
@@ -347,7 +372,7 @@ const Footer = () => {
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-6">
               <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center overflow-hidden border border-slate-100 shadow-sm">
-                <img src="./songbook_logo.jpg" alt="Logo" className="w-full h-full object-cover" />
+                <img src={`${import.meta.env.BASE_URL}songbook_logo.jpg`} alt="Logo" className="w-full h-full object-cover" />
               </div>
               <span className="font-sans font-bold text-xl tracking-tight text-slate-900">Liedgut</span>
             </div>
@@ -358,8 +383,7 @@ const Footer = () => {
           <div>
             <h4 className="text-[10px] uppercase font-bold tracking-widest mb-6 text-blue-600">Rechtliches</h4>
             <ul className="space-y-4 text-slate-500 text-sm font-medium">
-              <li><a href="#impressum" className="hover:text-blue-600 transition-colors">Impressum</a></li>
-              <li><a href="#privacy" className="hover:text-blue-600 transition-colors">Datenschutz</a></li>
+              <li><button onClick={onOpenPrivacy} className="hover:text-blue-600 transition-colors">Impressum & Datenschutz</button></li>
             </ul>
           </div>
           <div>
@@ -383,17 +407,19 @@ const Footer = () => {
 };
 
 export default function App() {
+  const [showPrivacy, setShowPrivacy] = useState(false);
+
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-indigo-100 selection:text-indigo-700">
-      <Navigation />
+      <Navigation onOpenPrivacy={() => setShowPrivacy(true)} />
       <main>
         <Hero />
         <Features />
         <Showcase />
-        <PrivacyPolicy />
         <Contact />
       </main>
-      <Footer />
+      <Footer onOpenPrivacy={() => setShowPrivacy(true)} />
+      <PrivacyPolicy isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} />
     </div>
   );
 }
