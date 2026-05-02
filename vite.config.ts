@@ -6,8 +6,10 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    // Wir nutzen eine relative Basis, damit die App sowohl lokal als auch in Unterordnern (wie bei GitHub Pages) funktioniert.
-    base: './',
+    // Wir nutzen den Repository-Namen als Basis fuer GitHub Pages in der Produktion.
+    // Falls dein Repository anders heisst, passe '/Liedgut/' entsprechend an.
+    // Lokal (und in der AI Studio Vorschau) nutzen wir '/', damit alles korrekt laedt.
+    base: mode === 'production' ? '/Liedgut/' : '/',
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
