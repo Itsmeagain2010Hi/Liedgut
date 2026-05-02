@@ -13,6 +13,26 @@ import libraryUrl from './assets/screenshot_library.jpg';
 import tabletUrl from './assets/screenshot_tablet.jpg';
 
 // Components
+const ImageWithFallback = ({ src, fallback, alt, className, ...props }: { src: string; fallback: string; alt: string; className?: string; [key: string]: any }) => {
+  const [imgSrc, setImgSrc] = useState(src);
+
+  return (
+    <img
+      src={imgSrc}
+      alt={alt}
+      className={className}
+      onError={() => {
+        if (imgSrc !== fallback) {
+          console.warn(`Failed to load image: ${src}. Falling back to placeholder.`);
+          setImgSrc(fallback);
+        }
+      }}
+      referrerPolicy="no-referrer"
+      {...props}
+    />
+  );
+};
+
 const Navigation = ({ onOpenPrivacy }: { onOpenPrivacy: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -29,7 +49,12 @@ const Navigation = ({ onOpenPrivacy }: { onOpenPrivacy: () => void }) => {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center overflow-hidden shadow-sm border border-slate-100">
-            <img src={logoUrl} alt="Logo" className="w-full h-full object-cover" />
+            <ImageWithFallback 
+              src={logoUrl} 
+              fallback="https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=200&h=200&auto=format&fit=crop" 
+              alt="Logo" 
+              className="w-full h-full object-cover" 
+            />
           </div>
           <span className="font-sans font-bold text-xl tracking-tight text-slate-900">Liedgut</span>
         </div>
@@ -86,7 +111,12 @@ const Hero = () => {
           {/* Library View Card */}
           <div className="w-[180px] h-[360px] sm:w-[280px] sm:h-[560px] bg-slate-900 rounded-[1.2rem] sm:rounded-[2rem] p-1.5 sm:p-2 shadow-2xl border-4 border-slate-800 relative z-10 overflow-hidden shrink-0">
             <div className="w-full h-full rounded-[0.8rem] sm:rounded-[1.4rem] overflow-hidden relative">
-              <img src={libraryUrl} alt="Liedgut Library View" className="w-full h-full object-cover" />
+              <ImageWithFallback 
+                src={libraryUrl} 
+                fallback="https://images.unsplash.com/photo-1514320291918-33ac9015c24d?q=80&w=800&h=1200&auto=format&fit=crop"
+                alt="Liedgut Library View" 
+                className="w-full h-full object-cover" 
+              />
             </div>
           </div>
           
@@ -97,7 +127,12 @@ const Hero = () => {
             className="absolute -bottom-8 -right-4 lg:-right-4 z-30 bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3 max-w-[160px] sm:max-w-[200px]"
           >
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center overflow-hidden border border-slate-50">
-              <img src={logoUrl} alt="Logo" className="w-full h-full object-cover" />
+              <ImageWithFallback 
+                src={logoUrl} 
+                fallback="https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=200&h=200&auto=format&fit=crop"
+                alt="Logo" 
+                className="w-full h-full object-cover" 
+              />
             </div>
             <div>
               <div className="text-[10px] sm:text-xs font-bold text-slate-900 leading-none">Format engine</div>
@@ -211,8 +246,9 @@ const Showcase = () => {
           className="relative"
         >
           <div className="relative z-10 p-2 sm:p-4 bg-slate-800 rounded-[2rem] sm:rounded-[2.5rem] border-[4px] sm:border-[8px] border-slate-700 shadow-2xl xl:-mr-20">
-            <img 
+            <ImageWithFallback 
               src={tabletUrl} 
+              fallback="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=1200&h=800&auto=format&fit=crop"
               alt="Liedgut App Tablet Interface"
               className="w-full h-auto rounded-xl sm:rounded-2xl shadow-inner bg-slate-800 object-contain transform-gpu"
               loading="eager"
@@ -376,7 +412,12 @@ const Footer = ({ onOpenPrivacy }: { onOpenPrivacy: () => void }) => {
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-6">
               <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center overflow-hidden border border-slate-100 shadow-sm">
-                <img src={logoUrl} alt="Logo" className="w-full h-full object-cover" />
+                <ImageWithFallback 
+                  src={logoUrl} 
+                  fallback="https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=200&h=200&auto=format&fit=crop"
+                  alt="Logo" 
+                  className="w-full h-full object-cover" 
+                />
               </div>
               <span className="font-sans font-bold text-xl tracking-tight text-slate-900">Liedgut</span>
             </div>
