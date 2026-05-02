@@ -6,8 +6,8 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    // Wir setzen die Basis-URL für GitHub Pages auf den Repository-Namen.
-    base: mode === 'production' ? '/liedgut/' : '/',
+    // Relative Basis ist am sichersten für GitHub Pages Unterordner.
+    base: './',
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
