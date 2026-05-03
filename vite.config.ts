@@ -6,7 +6,7 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    // Wir nutzen eine relative Basis, damit die App sowohl lokal als auch in Unterordnern (wie bei GitHub Pages) funktioniert.
+    // Wir nutzen eine relative Basis fuer maximale Kompatibilitaet mit GitHub Pages.
     base: './',
     plugins: [react(), tailwindcss()],
     define: {

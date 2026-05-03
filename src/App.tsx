@@ -33,6 +33,7 @@ const Navigation = ({ onOpenPrivacy }: { onOpenPrivacy: () => void }) => {
               src={logoUrl} 
               alt="Logo" 
               className="w-full h-full object-cover" 
+              referrerPolicy="no-referrer"
             />
           </div>
           <span className="font-sans font-bold text-xl tracking-tight text-slate-900">Liedgut</span>
@@ -94,6 +95,7 @@ const Hero = () => {
                 src={libraryUrl} 
                 alt="Liedgut Library View" 
                 className="w-full h-full object-cover" 
+                referrerPolicy="no-referrer"
               />
             </div>
           </div>
@@ -109,6 +111,7 @@ const Hero = () => {
                 src={logoUrl} 
                 alt="Logo" 
                 className="w-full h-full object-cover" 
+                referrerPolicy="no-referrer"
               />
             </div>
             <div>
@@ -228,6 +231,7 @@ const Showcase = () => {
               alt="Liedgut App Tablet Interface"
               className="w-full h-auto rounded-xl sm:rounded-2xl shadow-inner bg-slate-800 object-contain transform-gpu"
               loading="eager"
+              referrerPolicy="no-referrer"
             />
             {/* Tablet details */}
             <div className="absolute top-1/2 -left-1 w-1 h-8 bg-slate-600 rounded-r-full hidden sm:block"></div>
@@ -392,6 +396,7 @@ const Footer = ({ onOpenPrivacy }: { onOpenPrivacy: () => void }) => {
                   src={logoUrl} 
                   alt="Logo" 
                   className="w-full h-full object-cover" 
+                  referrerPolicy="no-referrer"
                 />
               </div>
               <span className="font-sans font-bold text-xl tracking-tight text-slate-900">Liedgut</span>
