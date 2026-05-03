@@ -8,9 +8,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Music, Layout, Settings, Share2, Shield, Mail, Globe, Play, Tablet, Layers, Download, Search } from 'lucide-react';
 
 // Assets
-import logoUrl from './assets/songbook_logo.jpg';
-import libraryUrl from './assets/screenshot_library.jpg';
-import tabletUrl from './assets/screenshot_tablet.jpg';
+const logoUrl = "songbook_logo.jpg";
+const libraryUrl = "screenshot_library.jpg";
+const tabletUrl = "screenshot_tablet.jpg";
 
 // Components
 const Navigation = ({ onOpenPrivacy }: { onOpenPrivacy: () => void }) => {
